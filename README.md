@@ -1,6 +1,16 @@
 # ReactNative Study
 ## CRNA 구조와 package.json
 
+- package.json 이 왜 만들어졌고 어떤 의미일까?
+- 기본적으로 설정되는 내용은 어떤 의미인가?
+- 왜 이러한 구조로 만들어졌을까?
+
+__nodeJS란?__
+
+- Chrome V8 Javascript 엔진으로 빌드된 Javascript 런타임(프로그래밍 언어가 구동되는 환경)
+- 나 노드로 서버 만들 줄 안다. => 백엔드 개발자
+- 나 노드로 의존성 모듈 관리하고 CLI를 Node.js 위에서 돌릴 줄 알아. => 프론트엔드 개발자
+
 node.js로 프로젝트를 진행하게 되면 자연스레 필요한 모듈들을 npm으로 설치를 해서 사용하게 된다. 
 
 npm이라는 것은 __node.js에서 사용 가능한 모듈들을 패키지화 시켜 모아놓은 것__ 인데, npm은 프로젝트에 대한 설정을 `package.json`이라는 파일에 의존하고 있다.
@@ -72,42 +82,6 @@ npm install -g create-react-native-app
 ```
 
 그리고 프로젝트 폴더를 생성한 후, 
-
-
-```
-create-react-native-app example
-
-cd example
-
-  Inside that directory, you can run several commands:
-
-    yarn start
-      Starts the development server so you can open your app in the Expo
-      app on your phone.
-
-    yarn run ios
-      (Mac only, requires Xcode)
-      Starts the development server and loads your app in an iOS simulator.
-
-    yarn run android
-      (Requires Android build tools)
-      Starts the development server and loads your app on a connected Android
-      device or emulator.
-
-
-    yarn test
-      Starts the test runner.
-
-    yarn run eject
-      Removes this tool and copies build dependencies, configuration files
-      and scripts into the app directory. If you do this, you can’t go back!
-
-
-  We suggest that you begin by typing:
-
-    cd step1-example
-    yarn start
-```
 
 npm start를 하면 개발 서버가 시작되고 터미널에 QR 코드가 인쇄된다.
 
