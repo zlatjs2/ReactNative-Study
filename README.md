@@ -219,3 +219,119 @@ pagingEnabled을 사용하여 밀어서 더보기와 같은 기능을 구현할 
 ### SectionList
 
 모든 요소를 한번에 표시
+
+
+## Networking
+
+### Using Fetch
+
+React Native는 네트워킹 요구에 맞는 Fetch API를 제공한다.
+
+__Making requests__
+
+```
+  fetch('https://mywebsite.com/mydata.json');
+```
+
+fetch는 추가 헤더를 지정하거나 POST 요청을 할 수 있다.
+
+```
+  ftech('https://mywebsite.com/mydata.json', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      firstParam: 'yourValue',
+      secondParam: 'yourOtherValue',
+    })
+  });
+```
+
+__Handling the response__
+
+```
+  function getMoviesFromApiAsync() {
+    return fetch('https://mywebsite.com/mydata.json')
+            .then((response) => response.json())
+            .then((responseJson) => {
+              return responseJson.movies;
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+  }
+```
+
+또는 `async/await` 구문을 사용할 수도 있다.
+
+```
+  async function getMoviesFromApi() {
+    try {
+      let response = await fetch('https://mywebsite.com/mydata.json');
+      let responseJson = await response.json();
+      return responseJson.movies;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+```
+
+
+__Using Other Networking Libraries__
+
+frisbee, axios 등을 사용 할 수 있고 원하는 경우 XMLHttpRequest API를 사용할 수 있다.
+
+```
+  var request = new XMLHttpRequest();
+  request.onreadystatechange = (e) => {
+    if (request.readyState !== 4) {
+      return;
+    }
+
+    if (request.status === 200) {
+      console.log('success', request.responseText);
+    } else {
+      console.warn('error');
+    }
+  }
+
+  request.open('GET', 'https://mywebsite.com/endpoint/');
+  request.send();
+```
+
+### WebSocket
+
+React Native는 단일 TCP 연결을 통해 전이중 통신 채널을 제공하는 프로토콜인 WebSockets 도 지원한다.
+
+__TCP란?__
+
+- 트랜스포트 계층: IP가 하지 않았던 데이터의 무결성을 보증
+- 목적지의 상대에 대해서 커넥션을 연결
+- 커넥션을 사용해 데이터의 누락을 체크하고, 데이터의 도달을 보증
+- TCP로 접속된 커넥션에서 전송하는 데이터가 어느 애플리케이션으로 전달될지 결정하는 것 = 포트번호
+  - HTTP는 기본적으로 80번 포트
+
+```
+  var ws = new WebSocket('ws://host.com/path');
+  ws.onopen = () => {
+    // connection oppened
+    ws.send('something); // send a message
+  };
+
+  ws.onmessage = (e) => {
+    // a message was received
+    console.log(e.data);
+  };
+
+  ws.onerror = (e) => {
+    // an error occurred
+    console.log(e.message);
+  };
+
+  ws.onclose = (e) => {
+    // connection closed
+    console.log(e.code, e.reason);
+  };
+```
