@@ -335,3 +335,192 @@ __TCP란?__
     console.log(e.code, e.reason);
   };
 ```
+
+## components and APIs
+
+### Basic Components
+
+React Native의 기본 구성요소
+
+__View__ 
+
+UI 구현을 위한 가장 베이직한 컴포넌트
+
+__Text__
+
+__Image__
+
+__TextInput__
+
+__ScrollView__
+
+__StyleSheet__
+
+
+### User Interface
+
+공통 사용자 인터페이스 컨트롤
+
+__Button__
+
+__Picker__
+
+iOS, Android에서 피커 구성요소를 렌더링 ? 
+
+__Slider__
+
+__Switch__
+
+boolean을 렌더링
+
+
+### List Views
+
+`ScrollView`와 다르게 __현재 화면에 표시되는 요소만 렌더링__
+
+__FlatList__
+
+실행 가능한 스크롤 목록
+
+__SectionList__
+
+`FlatList`와 같지만 단락 목록용 (좀더 작은 범위?)
+
+### iOS Components and APIs
+
+__ActionSheetIOS__ ??????
+
+__AlertIOS__
+
+__DatePickerIOS__
+
+__ImagePickerIOS__ ?????
+
+__NavigatorIOS__
+
+__ProgressViesIOS__
+
+__PushNotificationIOS__
+
+__SegmentedControllIOS__
+
+__TabBarIOS__
+
+
+
+### Android Components and APIs
+
+__BackHandler__
+
+__DatePickerAndroid__
+
+__DrawerLayoutAndroid__ ?????
+
+__PermissionsAndroid__ ??????
+
+__ProgressBarAndroid__
+
+__TimePickerAndroid__
+
+__ToastAndroid__
+
+__ToolbarAndroid__
+
+__viewPagerAndroid__ ????? 좌우를 왜바꿈?????
+
+
+### Others
+
+다시 읽어보기 (패스)
+
+
+## Platform Specific Code
+
+React Native는 코드를 쉽게 구성하고 플랫폼별로 분리하는 두 가지 방법을 제공한다.
+
+- 플랫폼 모듈을 사용하는 방법
+- 플랫폼 별 파일 확장명을 사용하는 방법
+
+
+### Platform module 
+
+플랫폼을 감지하여 그에 맞는 모듈을 제공
+
+```
+	import { Platform, StyleSheet } from 'react-native';
+	
+	const styles = StyleSheet.create({
+		height: Platform.OS === 'ios' ? 200 : 100,
+	});
+
+```
+ 
+Platform.OS를 키로 가지는 객체가 주어지면 Platform.select라는 메소드를 사용할 수 있다.
+
+```
+	import { Platform, StyleSheet } from 'react-native';
+	
+	const styles = StyleSheet.create({
+	  container: {
+	    flex: 1,
+	    ...Platform.select({
+	      ios: {
+	        backgroundColor: 'red',
+	      },
+	      android: {
+	        backgroundColor: 'blue',
+	      },
+	    }),
+	  },
+	});
+```
+
+
+
+
+## Navigating Between Screens
+
+React Navigation은 iOS와 Android 모두에서 일반적은 스택 탐색 및 탭 탐색 패턴을 제공한다.
+
+자바스크립트 구현이므로 redux와 같은 상태 관리 라이브러리와 함께 사용할 수 있다.
+
+
+### React Navigation
+
+
+```
+npm install --save react-navigation
+```
+
+
+```
+import { StackNavigator } from 'react-navigation';
+
+const App = StackNavigator({
+	Home: { screen: HomeScreen },
+	Profile: { screen: ProfileScrren },
+});
+
+```
+
+- 탐색 옵션을 설정할 수 있다.
+- 라우터를 사용하면 정의 등이 편리하다
+- `Animated` 라이브러리를 사용하여 애니메이션을 사용할 수 있다.
+
+
+### NavigatorIOS
+
+```
+<NavigatorIOS
+	initialRoute=({
+		component: MyScene,
+		title: 'My Initial Scene',
+		passProps: { myProp: 'foo' }
+	})
+/>
+```
+
+- `passProps`: 전달해야하는 모든 props를 지정
+- navigator 객체는 필요에 따라 push, pop을 호출 할 수 있다.
+- UIKit 탐색 기능을 기본적으로 활용하므로 뒤로버튼과 제목을 자동으로 렌더링 한다. 
+
