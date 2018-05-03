@@ -524,3 +524,10 @@ const App = StackNavigator({
 - navigator 객체는 필요에 따라 push, pop을 호출 할 수 있다.
 - UIKit 탐색 기능을 기본적으로 활용하므로 뒤로버튼과 제목을 자동으로 렌더링 한다. 
 
+
+#### Props, State example
+
+함수형 컴포넌트와 클래스형 컴포넌트의 주요 차이점은은 `state`와 `LifeCycle`이 빠져있다는 점이다.
+
+
+
